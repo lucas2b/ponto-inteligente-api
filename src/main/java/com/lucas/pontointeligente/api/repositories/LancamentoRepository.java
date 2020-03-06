@@ -4,6 +4,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lucas.pontointeligente.api.entities.Lancamento;
 
@@ -17,7 +18,7 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name = "LancamentoRepository.findByFuncionarioId", 
 			   query = "SELECT lan FROM Lancamento lanc WHERE lanc.funcionario.id = :funcionarioId")
 })
-public interface LancamentoRepository {
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>{
 	
 	List<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId);
 	
