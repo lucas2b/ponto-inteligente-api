@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -17,6 +19,7 @@ import com.lucas.pontointeligente.api.entities.Funcionario;
 import com.lucas.pontointeligente.api.enums.PerfilEnum;
 import com.lucas.pontointeligente.api.repositories.EmpresaRepository;
 import com.lucas.pontointeligente.api.repositories.FuncionarioRepository;
+import com.lucas.pontointeligente.api.services.impl.EmpresaServiceImpl;
 import com.lucas.pontointeligente.api.utils.PasswordUtils;
 
 @SpringBootTest
@@ -82,7 +85,6 @@ public class FuncionarioRepositoryTest {
 	@Test
 	public void testBuscarFuncionarioPorEmailOuCpf() {
 		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, EMAIL);
-		
 		assertNotNull(funcionario);
 	}
 	
