@@ -1,4 +1,4 @@
-package com.lucas.pontointeligente.api;
+package com.lucas.pontointeligente.api.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
