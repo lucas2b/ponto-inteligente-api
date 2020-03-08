@@ -27,7 +27,7 @@ public class Empresa implements Serializable{
 	private String razaoSocial;
 	private String cnpj;
 	private Date dataCriacao;
-	private Date dataAtulizacao;
+	private Date dataAtualizacao;
 	private List<Funcionario> funcionarios;
 	
 	public Empresa() {
@@ -73,11 +73,11 @@ public class Empresa implements Serializable{
 
 	@Column(name = "data_atualizacao", nullable = false)
 	public Date getDataAtulizacao() {
-		return dataAtulizacao;
+		return dataAtualizacao;
 	}
 
 	public void setDataAtulizacao(Date dataAtulizacao) {
-		this.dataAtulizacao = dataAtulizacao;
+		this.dataAtualizacao = dataAtulizacao;
 	}
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -95,20 +95,20 @@ public class Empresa implements Serializable{
 	
 	@PreUpdate
 	public void preUpdate() {
-		dataAtulizacao = new Date();
+		dataAtualizacao = new Date();
 	}
 	
 	@PrePersist
 	public void prePersist() {
 		final Date atual = new Date();
 		dataCriacao = atual;
-		dataAtulizacao = atual;
+		dataAtualizacao = atual;
 	}
 	
 	@Override
 	public String toString() {
 		return "Empresa [id=" + id + ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + 
-				", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtulizacao + "]";
+				", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + "]";
 	}
 	
 
