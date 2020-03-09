@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,7 @@ public class CadastroPJController {
 		
 		ResponseWrapper<CadastroPJDto> responseWrapper = new ResponseWrapper<CadastroPJDto>();
 		
-		validarDadosExistentes(cadastroPJDto, result);
+		//validarDadosExistentes(cadastroPJDto, result);
 		
 		if(result.hasErrors()) {
 			log.error("Erro Validando dados de cadastro PJ: {}", result.getAllErrors());
@@ -66,8 +67,12 @@ public class CadastroPJController {
 		Funcionario funcionario = this.converterDtoParaEntityFuncionario(cadastroPJDto); //converte DTO para Entity
 		funcionario.setEmpresa(empresa);
 		
-		this.empresaService.persistir(empresa); //persistindo Entity
-		this.funcionarioService.persistir(funcionario); //persistindo Entity
+		log.info("------->>>> Funcionário antes de persistir: {}", funcionario);
+		
+		this.empresaService.persistir(empresa); //persistindo Entity Empresa
+		this.funcionarioService.persistir(funcionario); //persistindo Entity Empresa
+		
+		log.info("------->>>> Funcionário d de persistir: {}", funcionario);
 		
 		responseWrapper.setData(this.converterFuncionarioEntityEmCadastroPJDto(funcionario));
 				
@@ -127,6 +132,12 @@ public class CadastroPJController {
 		cadastroPJDto.setCnpj(funcionario.getEmpresa().getCnpj());
 		
 		return cadastroPJDto;
+	}
+	
+	 @GetMapping("/testRest")
+	public void testRest() {
+		 log.info("---------------->>>> BATEU NO REST <<<<<--------------");
+		
 	}
 	
 	
